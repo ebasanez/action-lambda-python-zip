@@ -6,6 +6,10 @@ inputs:
     description: the name/path to the requirements.txt file
     required: true
     default: 'requirements.txt'
+  requirements_extra_index_url:
+    description: additional url for pip install command
+    required: false
+    default: None    
   lambda_layer_arn:
     description: The ARN for the Lambda layer the dependencies should be pushed to without the version (every push is a new version).
     required: true
@@ -20,6 +24,7 @@ runs:
     - ${{ inputs.lambda_layer_arn }}
     - ${{ inputs.lambda_function_name }}
     - ${{ inputs.lambda_region }}
+    - ${{ inputs.requirements_extra_index_url}}
 branding:
   icon: 'cloud-lightning'
   color: 'white'
