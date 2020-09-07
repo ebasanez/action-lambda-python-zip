@@ -10,7 +10,7 @@ install_zip_dependencies(){
 	echo "Installing and zipping dependencies..."
 	mkdir python
 	echo "Using remote private repo ${INPUT_REQUIREMENTS_EXTRA_INDEX_URL}"
-	pip install --target=python -r "${INPUT_REQUIREMENTS_TXT}" -f "${INPUT_REQUIREMENTS_EXTRA_INDEX_URL}"
+	pip install --target=python -r "${INPUT_REQUIREMENTS_TXT}" --index-extra-url "${INPUT_REQUIREMENTS_EXTRA_INDEX_URL}"
 	zip -r dependencies.zip ./python
 }
 
