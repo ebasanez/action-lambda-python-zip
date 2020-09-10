@@ -32,7 +32,8 @@ Storing credentials as secret is stronly recommended.
     - Partial ARN - `123456789012:function:function-name`
 - `requirements_txt`
     The name/path for the `requirements.txt` file. Defaults to `requirements.txt`.
-
+  `requirements_extra_index_url`
+    Url to private repo, in order to add our libraries to the Lambda layer. Defaults to `None`.
 ### Example Workflow
 ```yaml
 on:
@@ -51,6 +52,7 @@ jobs:
         lambda_layer_arn: 'arn:aws:lambda:eu-central-1:222222222222:layer:layer-name'
         lambda_function_name: ${{ secrets.LAMBDA_FUNCTION_NAME }}
         lambda_region: 'eu-central-1'
+        requirements_extra_index_url: ${{ secrets.PRIVATE_REPO_URL }}
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}

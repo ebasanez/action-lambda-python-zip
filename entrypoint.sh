@@ -9,7 +9,6 @@ configure_aws_credentials(){
 install_zip_dependencies(){
 	echo "Installing and zipping dependencies..."
 	mkdir python
-	echo "Using remote private repo ${INPUT_REQUIREMENTS_EXTRA_INDEX_URL}"
 	pip install --target=python -r "${INPUT_REQUIREMENTS_TXT}" --extra-index-url "${INPUT_REQUIREMENTS_EXTRA_INDEX_URL}"
 	zip -r dependencies.zip ./python
 }
@@ -24,7 +23,7 @@ publish_dependencies_as_layer(){
 
 publish_function_code(){
 	echo "Deploying the code itself..."
-	zip -r code.zip . -x \*.git\*
+	zip -r code.zip . -x \*.git\* -x "test" -x 'README.md'
 	aws lambda update-function-code --function-name "${INPUT_LAMBDA_FUNCTION_NAME}" --zip-file fileb://code.zip
 }
 
